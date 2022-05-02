@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Clustered Usage :: NATS Documentation</title>
+    <link rel="canonical" href="http://localhost:8000/nats-go/main/clustered.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="../../_/css/custom.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="http://localhost:8000">NATS Documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://nats.io" target="_blank">NATS.io</a>
+            <a class="navbar-item" href="https://twitter.com/nats_io" target="_blank">Twitter</a>
+            <a class="navbar-item" href="https://slack.nats.io" target="_blank">Slack</a>
+            <a class="navbar-item" href="https://github.com/nats-io" target="_blank">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="nats-go" data-version="main">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Nats Go Client</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Examples</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="basic.html">Basic Usage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jetstream-basic.html">JetStream Basic Usage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jetstream-management.html">JetStream Basic Management</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="encoded-connections.html">Encoded Connections</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="auth.html">New Authentication (Nkeys and User Crednetials)</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="tls.html">TLS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="channels.html">Using Go Channels (netchan)</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="wildcard.html">Wildcard Subscriptions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="queue.html">Queue Groups</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="advanced.html">Advanced Usage</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="clustered.html">Clustered Usage</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="context.html">Context Support</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Nats Go Client</span>
+    <span class="version">main</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="index.html">Nats Go Client</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">main</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="../../nats-py/main/index.html">Nats Python3 Client</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../nats-py/main/index.html">main</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Nats Go Client</a></li>
+    <li>Examples</li>
+    <li><a href="clustered.html">Clustered Usage</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/hooksie1/nats.go/edit/documentation-site/docs/modules/ROOT/pages/clustered.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Clustered Usage</h1>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-go hljs" data-lang="go">var servers = "nats://localhost:1222, nats://localhost:1223, nats://localhost:1224"
+
+nc, err := nats.Connect(servers)
+
+// Optionally set ReconnectWait and MaxReconnect attempts.
+// This example means 10 seconds total per backend.
+nc, err = nats.Connect(servers, nats.MaxReconnects(5), nats.ReconnectWait(2 * time.Second))
+
+// You can also add some jitter for the reconnection.
+// This call will add up to 500 milliseconds for non TLS connections and 2 seconds for TLS connections.
+// If not specified, the library defaults to 100 milliseconds and 1 second, respectively.
+nc, err = nats.Connect(servers, nats.ReconnectJitter(500*time.Millisecond, 2*time.Second))
+
+// You can also specify a custom reconnect delay handler. If set, the library will invoke it when it has tried
+// all URLs in its list. The value returned will be used as the total sleep time, so add your own jitter.
+// The library will pass the number of times it went through the whole list.
+nc, err = nats.Connect(servers, nats.CustomReconnectDelay(func(attempts int) time.Duration {
+    return someBackoffFunction(attempts)
+}))
+
+// Optionally disable randomization of the server pool
+nc, err = nats.Connect(servers, nats.DontRandomize())
+
+// Setup callbacks to be notified on disconnects, reconnects and connection closed.
+nc, err = nats.Connect(servers,
+	nats.DisconnectErrHandler(func(nc *nats.Conn, err error) {
+		fmt.Printf("Got disconnected! Reason: %q\n", err)
+	}),
+	nats.ReconnectHandler(func(nc *nats.Conn) {
+		fmt.Printf("Got reconnected to %v!\n", nc.ConnectedUrl())
+	}),
+	nats.ClosedHandler(func(nc *nats.Conn) {
+		fmt.Printf("Connection closed. Reason: %q\n", nc.LastError())
+	})
+)
+
+// When connecting to a mesh of servers with auto-discovery capabilities,
+// you may need to provide a username/password or token in order to connect
+// to any server in that mesh when authentication is required.
+// Instead of providing the credentials in the initial URL, you will use
+// new option setters:
+nc, err = nats.Connect("nats://localhost:4222", nats.UserInfo("foo", "bar"))
+
+// For token based authentication:
+nc, err = nats.Connect("nats://localhost:4222", nats.Token("S3cretT0ken"))
+
+// You can even pass the two at the same time in case one of the server
+// in the mesh requires token instead of user name and password.
+nc, err = nats.Connect("nats://localhost:4222",
+    nats.UserInfo("foo", "bar"),
+    nats.Token("S3cretT0ken"))
+
+// Note that if credentials are specified in the initial URLs, they take
+// precedence on the credentials specified through the options.
+// For instance, in the connect call below, the client library will use
+// the user "my" and password "pwd" to connect to localhost:4222, however,
+// it will use username "foo" and password "bar" when (re)connecting to
+// a different server URL that it got as part of the auto-discovery.
+nc, err = nats.Connect("nats://my:pwd@localhost:4222", nats.UserInfo("foo", "bar"))</code></pre>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

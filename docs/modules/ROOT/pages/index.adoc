@@ -1,3 +1,0 @@
-= NATS Documentation Site
-
-This site has NATS

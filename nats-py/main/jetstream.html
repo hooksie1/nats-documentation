@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Jetstream :: NATS Documentation</title>
+    <link rel="canonical" href="http://localhost:8000/nats-py/main/jetstream.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="../../_/css/custom.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="http://localhost:8000">NATS Documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://nats.io" target="_blank">NATS.io</a>
+            <a class="navbar-item" href="https://twitter.com/nats_io" target="_blank">Twitter</a>
+            <a class="navbar-item" href="https://slack.nats.io" target="_blank">Slack</a>
+            <a class="navbar-item" href="https://github.com/nats-io" target="_blank">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="nats-py" data-version="main">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Nats Python3 Client</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="index.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Examples</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="basic.html">Basic</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="jetstream.html">JetStream</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="tls.html">TLS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="auth.html">NKeys and JWT User Credentials</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Nats Python3 Client</span>
+    <span class="version">main</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../nats-go/main/index.html">Nats Go Client</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../nats-go/main/index.html">main</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="index.html">Nats Python3 Client</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">main</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Nats Python3 Client</a></li>
+    <li>Examples</li>
+    <li><a href="jetstream.html">JetStream</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/hooksie1/nats.py/edit/documentation-site/docs/modules/ROOT/pages/jetstream.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Jetstream</h1>
+<div class="paragraph">
+<p>NOTE:
+Starting with v2.0.0, the client now has JetStream support.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">import asyncio
+import nats
+from nats.errors import TimeoutError
+
+async def main():
+    nc = await nats.connect("localhost")
+
+    # Create JetStream context.
+    js = nc.jetstream()
+
+    # Persist messages on 'foo's subject.
+    await js.add_stream(name="sample-stream", subjects=["foo"])
+
+    for i in range(0, 10):
+        ack = await js.publish("foo", f"hello world: {i}".encode())
+        print(ack)
+
+    # Create pull based consumer on 'foo'.
+    psub = await js.pull_subscribe("foo", "psub")
+
+    # Fetch and ack messagess from consumer.
+    for i in range(0, 10):
+        msgs = await psub.fetch(1)
+        for msg in msgs:
+            print(msg)
+
+    # Create single ephemeral push based subscriber.
+    sub = await js.subscribe("foo")
+    msg = await sub.next_msg()
+    await msg.ack()
+
+    # Create single push based subscriber that is durable across restarts.
+    sub = await js.subscribe("foo", durable="myapp")
+    msg = await sub.next_msg()
+    await msg.ack()
+
+    # Create deliver group that will be have load balanced messages.
+    async def qsub_a(msg):
+        print("QSUB A:", msg)
+        await msg.ack()
+
+    async def qsub_b(msg):
+        print("QSUB B:", msg)
+        await msg.ack()
+    await js.subscribe("foo", "workers", cb=qsub_a)
+    await js.subscribe("foo", "workers", cb=qsub_b)
+
+    for i in range(0, 10):
+        ack = await js.publish("foo", f"hello world: {i}".encode())
+        print("\t", ack)
+
+    # Create ordered consumer with flow control and heartbeats
+    # that auto resumes on failures.
+    osub = await js.subscribe("foo", ordered_consumer=True)
+    data = bytearray()
+
+    while True:
+        try:
+            msg = await osub.next_msg()
+            data.extend(msg.data)
+        except TimeoutError:
+            break
+    print("All data in stream:", len(data))
+
+    await nc.close()
+
+if __name__ == '__main__':
+    asyncio.run(main())</code></pre>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

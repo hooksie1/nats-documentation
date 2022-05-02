@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Overview :: NATS Documentation</title>
+    <link rel="canonical" href="http://localhost:8000/nats-py/main/index.html">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="stylesheet" href="../../_/css/site.css">
+    <link rel="stylesheet" href="../../_/css/custom.css">
+    <script>var uiRootPath = '../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="http://localhost:8000">NATS Documentation</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Links</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://nats.io" target="_blank">NATS.io</a>
+            <a class="navbar-item" href="https://twitter.com/nats_io" target="_blank">Twitter</a>
+            <a class="navbar-item" href="https://slack.nats.io" target="_blank">Slack</a>
+            <a class="navbar-item" href="https://github.com/nats-io" target="_blank">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="nats-py" data-version="main">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Nats Python3 Client</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="index.html">Overview</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Examples</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="basic.html">Basic</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="jetstream.html">JetStream</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="tls.html">TLS</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="auth.html">NKeys and JWT User Credentials</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Nats Python3 Client</span>
+    <span class="version">main</span>
+  </div>
+  <ul class="components">
+    <li class="component">
+      <a class="title" href="../../nats-go/main/index.html">Nats Go Client</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="../../nats-go/main/index.html">main</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component is-current">
+      <a class="title" href="index.html">Nats Python3 Client</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">main</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Nats Python3 Client</a></li>
+    <li><a href="index.html">Overview</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/hooksie1/nats.py/edit/documentation-site/docs/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Overview</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>An <a href="https://docs.python.org/3/library/asyncio.html">asyncio</a> Python client for the <a href="https://nats.io/">NATS messaging system</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_supported_platforms"><a class="anchor" href="#_supported_platforms"></a>Supported Platforms</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Should be compatible with at least <a href="https://docs.python.org/3.7/library/asyncio.html">Python +3.7</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_installation"><a class="anchor" href="#_installation"></a>Installation</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-python hljs" data-lang="python">pip install nats-py</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_development"><a class="anchor" href="#_development"></a>Development</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="https://docs.nats.io/running-a-nats-service/introduction/installation">Install NATS server</a></p>
+</li>
+<li>
+<p>Make sure the server is available in your PATH: <code>nats-server -v</code>.</p>
+</li>
+<li>
+<p>Install dependencies: <code>python3 -m pipenv install --dev</code>.</p>
+</li>
+<li>
+<p>Run tests: <code>python3 -m pytest</code>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <p>This page was built using the Antora default UI.</p>
+  <p>The source code for this UI is licensed under the terms of the MPL-2.0 license.</p>
+</footer>
+<script src="../../_/js/site.js"></script>
+<script async src="../../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
