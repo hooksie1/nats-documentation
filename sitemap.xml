@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <sitemap>
-<loc>http://localhost:8000/sitemap-nats-go.xml</loc>
+<loc>https://hooksie1.github.io/nats-documentation/sitemap-nats-documentation.xml</loc>
 </sitemap>
 <sitemap>
-<loc>http://localhost:8000/sitemap-nats-py.xml</loc>
+<loc>https://hooksie1.github.io/nats-documentation/sitemap-nats-go.xml</loc>
+</sitemap>
+<sitemap>
+<loc>https://hooksie1.github.io/nats-documentation/sitemap-nats-py.xml</loc>
 </sitemap>
 </sitemapindex>
