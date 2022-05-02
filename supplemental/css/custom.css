@@ -1,0 +1,29 @@
+
+body {
+  font-family: "Segoe UI",Helvetica,Arial,sans-serif;
+}
+
+.navbar {
+ background:#00011f;
+ color:#fff;
+ font-size:.88889rem;
+ height:3.5rem;
+ position:fixed;
+ top:0;
+ width:100%;
+ word-wrap:break-word;
+ z-index:4;
+}
+
+thead {
+  background-color: #4d148c3d;
+}
+
+table tr:nth-child(even) {
+  background-color: #4d148c1c;
+}
+
+#topbar-nav .navbar-item:hover > .navbar-link {
+  background:#2a084f;
+  color:#8dc63f !important;
+}

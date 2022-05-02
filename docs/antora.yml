@@ -1,0 +1,5 @@
+name: nats-documentation
+title: NATS Documentation
+version: master
+nav:
+- modules/ROOT/nav.adoc
