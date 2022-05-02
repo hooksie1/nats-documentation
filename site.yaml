@@ -1,12 +1,12 @@
 site:
   title: NATS Documentation
-  url: http://localhost:8000
+  url: https://hooksie1.github.io/nats-documentation/
   start_page: nats-documentation::index.adoc
 
 content:
   sources:
   - url: "."
-    branches: master
+    branches: main
     start_path: docs
   - url: "https://github.com/hooksie1/nats.go"
     branches: documentation-site
